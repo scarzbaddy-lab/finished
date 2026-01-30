@@ -803,8 +803,9 @@
       }
       nodes.forEach((textNode) => {
         const value = textNode.nodeValue;
-        if (value && /^[\s-]+$/.test(value)) {
-          textNode.nodeValue = value.replace(/-/g, '');
+        // Remove leading stray dashes from text nodes, preserving whitespace and inner dashes.
+        if (value && /^\s*-/.test(value)) {
+          textNode.nodeValue = value.replace(/^([\s-]+)/, (match) => match.replace(/-/g, ''));
         }
       });
     };
