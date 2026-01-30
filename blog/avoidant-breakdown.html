@@ -697,8 +697,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       stripStyleDashes();
-      stripWhitespaceDashes(document.head);
-      stripWhitespaceDashes(document.body);
+      stripWhitespaceDashes(document.documentElement);
     });
   </script>
 
