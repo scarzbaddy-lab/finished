@@ -1,5 +1,5 @@
--<!DOCTYPE html>
--<html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 -<head>
 -  <meta charset="UTF-8">
 -  <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -671,8 +671,38 @@
 -      <p>© 2025 Unscarred. <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a></p>
 -    </div>
 -  </footer>
--
--</body>
+
+  <script>
+    const stripStyleDashes = () => {
+      document.querySelectorAll('style').forEach((style) => {
+        style.textContent = style.textContent.replace(/^-/, '');
+        style.textContent = style.textContent.replace(/\n-/g, '\n');
+      });
+    };
+
+    const stripWhitespaceDashes = (root) => {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      let node;
+      while ((node = walker.nextNode())) {
+        nodes.push(node);
+      }
+      nodes.forEach((textNode) => {
+        const value = textNode.nodeValue;
+        if (value && /^[\s-]+$/.test(value)) {
+          textNode.nodeValue = value.replace(/-/g, '');
+        }
+      });
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      stripStyleDashes();
+      stripWhitespaceDashes(document.head);
+      stripWhitespaceDashes(document.body);
+    });
+  </script>
+
+</body>
 -</html>
 -
 -
