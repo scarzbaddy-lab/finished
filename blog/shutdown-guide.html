@@ -789,8 +789,10 @@
   <script>
     const stripStyleDashes = () => {
       document.querySelectorAll('style').forEach((style) => {
-        style.textContent = style.textContent.replace(/^-/, '');
-        style.textContent = style.textContent.replace(/\n-/g, '\n');
+        // Remove one or more leading dashes at the very start of the style content
+        style.textContent = style.textContent.replace(/^-+/, '');
+        // Remove one or more dashes immediately following a newline
+        style.textContent = style.textContent.replace(/\n-+/g, '\n');
       });
     };
 
