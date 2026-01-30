@@ -694,11 +694,10 @@
         }
       });
     };
-
-    document.addEventListener('DOMContentLoaded', () => {
-      stripStyleDashes();
-      stripWhitespaceDashes(document.documentElement);
-    });
+    // Run critical style and whitespace cleanup immediately so it cannot miss DOMContentLoaded.
+    stripStyleDashes();
+    stripWhitespaceDashes(document.head);
+    stripWhitespaceDashes(document.body);
   </script>
 
 </body>
